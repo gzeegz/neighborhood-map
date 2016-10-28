@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <title>Neighborhood Map of Top Picks</title>
+</head>
+
+<body>
+  <div class="container">
+    <div id="panel">
+      <header>
+        <div class="title">
+          <h3>Top Picks</h3>
+          <h4 class="location" data-bind="text: location, css: {failed: foundLocation() == false}"></h4>
+        </div>
+
+        <div id="search">
+          <form data-bind="submit: loadPlace">
+            <input class="search-input" type="text" data-bind="value: locationInput" placeholder="Enter a location">
+            <input type="button" value="Go!" data-bind="click: loadPlace">
+          </form>
+
+          <div id="filter">
+            <input class="search-input" id="filter-text" type="search" placeholder="Filter by name" data-bind="value: query, valueUpdate: 'keyup'">
+          </div>
+        </div>
+      </header>
+
+      <div id="list">
+        <ul data-bind="foreach: search">
+          <li data-bind="attr: {id: id}">
+            <div data-bind="click: $parent.showInfoWindow">
+              <h3 class="place-name">
+                <span data-bind="text: name"></span>
+                <span class="place-rating" data-bind="text: rating, style: {color: '#' + ratingColor}"></span>
+              </h3>
+            </div>
+
+            <div class="place-details">
+                <p class="place-category">
+                  <span data-bind="text: category"></span>
+                  <!-- Add price if it exists. -->
+                  <span data-bind="if: price">
+                     •  <span data-bind="text: price"></span>
+                  </span>
+                </p>
+                <p class="place-address">
+                  <span data-bind="text: formattedAddress[0]"></span>
+                  <br>
+                  <span data-bind="text: formattedAddress[1]"></span>
+                </p>
+            </div>
+
+            <!-- Add tip if it exists. -->
+            <div class="place-tip" data-bind="if: tips">
+              <h4>Tip:</h4>
+              <p class="place-tip-user">
+                <span data-bind="text: tips.user.firstName"></span>
+                 •
+                <span data-bind="text: tips.createdAt"></span>
+              </p>
+              <p class="place-tip-text">
+                <a data-bind="attr: {href: tips.url}" target="_blank">
+                  <span data-bind="text: tips.text"></span>
+                </a>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <footer>
+        Powered by Foursquare
+      </footer>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <script src="js/lib/knockout-3.4.0.js"></script>
+  <script src="js/lib/jquery-3.1.1.min.js"></script>
+  <script src="js/app.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4Qk_VufjuP9gBe8JUMnAvBI_naDh17rY&v=3&callback=initMap"
+    onerror="googleError()">
+  </script>
+</body>
+</html>
