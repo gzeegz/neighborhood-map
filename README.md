@@ -3,7 +3,11 @@
 Top Picks shows you the top places in a location according to Foursquare's "Top Picks." It is implemented using Google Maps API, Foursquare API, Knockout, and jQuery. The default location when loaded is San Francisco, CA.
 
 ## Getting Started
-Point your browser to `index.html`. Note that you need an active internet connection!
+Try it here: [Neighboorhood Map](https://gzeegz.github.io/neighborhood-map/)
+
+OR
+
+Clone the repo and point your browser to `index.html`. Note that you need an active internet connection!
 
 ## Features
 - Shows 15 top places in a location
